@@ -1,4 +1,6 @@
 using CamKyscn.Services.BandaService;
+using CamKyscn.Services.FotoService;
+using CamKyscn.Services.PaqueteService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,7 +29,10 @@ namespace CamKyscn
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();
+			services.AddAutoMapper(typeof(Startup));
 			services.AddScoped<IBandaService, BandaService>();
+			services.AddScoped<IFotoService, FotoService>();
+			services.AddScoped<IPaqueteService, PaqueteService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,6 @@
-﻿using CamKyscn.Entities;
+﻿using AutoMapper;
+using CamKyscn.Dtos;
+using CamKyscn.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +10,27 @@ namespace CamKyscn.Services.BandaService
 {
 	public class BandaService : IBandaService
 	{
-		public async Task<ServiceResponse<Banda>> AddBanda(Banda banda)
+        private readonly IMapper _mapper;
+
+        public BandaService(IMapper	 mapper)
+		{
+			this._mapper = mapper;
+		}
+		public async Task<ServiceResponse<AddBandaDTO>> AddBanda(AddBandaDTO banda)
 		{
 			throw new NotImplementedException();
 		}
 
-		public async Task<ServiceResponse<List<Banda>>> GetAllBandas()
+		public async Task<ServiceResponse<List<GetBandaDTO>>> GetAllBandas()
 		{
 			throw new NotImplementedException();
 		}
 
-		public async Task<ServiceResponse<Banda>> GetBandaById(int id)
+		public async Task<ServiceResponse<GetBandaDTO>> GetBandaById(int id)
 		{
-			ServiceResponse<Banda> serviceResponse = new ServiceResponse<Banda>();
-			serviceResponse.Data = new Banda { Codigo = "abc", Id = 1 };
+			Banda bandaGen = new Banda { Codigo = "abc", Id = id };
+			ServiceResponse<GetBandaDTO> serviceResponse = new ServiceResponse<GetBandaDTO>();
+			serviceResponse.Data = _mapper.Map<GetBandaDTO>(bandaGen);
 			return serviceResponse;
 		}
 	}
