@@ -7,6 +7,7 @@ namespace CamKyscn.Entities
     {
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
+        public bool Comprado { get; set; }
         public string Codigo { get; set; }
         public HashSet<Banda> bandas {get;set;}
     }
