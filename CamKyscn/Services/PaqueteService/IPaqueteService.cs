@@ -7,7 +7,7 @@ namespace CamKyscn.Services.PaqueteService
     public interface IPaqueteService
     {
         Task<ServiceResponse<GetPaqueteDTO>> GetPaqueteById(int id);
-        Task<ServiceResponse<AddPaqueteDTO>> AddPaquete(AddPaqueteDTO paquete);
+        Task<ServiceResponse<GetPaqueteDTO>> AddPaquete(AddPaqueteDTO paquete);
 
     }
 }

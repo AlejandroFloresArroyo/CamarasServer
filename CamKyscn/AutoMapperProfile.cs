@@ -1,5 +1,6 @@
 using AutoMapper;
 using CamKyscn.Dtos;
+using CamKyscn.Dtos.Paquete;
 using CamKyscn.Entities;
 
 namespace CamKyscn
@@ -12,6 +13,11 @@ namespace CamKyscn
             CreateMap<Banda, GetBandaDTO>();
             CreateMap<Banda, AddBandaDTO>();
             CreateMap<AddBandaDTO, Banda>();
+            
+            CreateMap<AddPaqueteDTO, Paquete>();
+            CreateMap<Paquete, AddPaqueteDTO>();
+            CreateMap<GetPaqueteDTO, Paquete>();
+            CreateMap<Paquete, GetPaqueteDTO>();
         }
         
     }

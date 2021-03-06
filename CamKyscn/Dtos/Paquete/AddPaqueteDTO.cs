@@ -9,6 +9,5 @@ namespace CamKyscn.Dtos.Paquete
         public bool Comprado { get; set; }
 
         public Banda[] Bandas { get; set; }
-
     }
 }

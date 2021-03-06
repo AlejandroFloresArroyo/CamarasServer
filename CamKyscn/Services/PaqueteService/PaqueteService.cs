@@ -1,5 +1,7 @@
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using CamKyscn.Context;
 using CamKyscn.Dtos.Paquete;
 using CamKyscn.Entities;
 
@@ -9,18 +11,29 @@ namespace CamKyscn.Services.PaqueteService
     {
 
         private readonly IMapper _mapper;
-        public PaqueteService(IMapper mapper)
-		{
-			this._mapper = mapper;
-		}
-        public Task<ServiceResponse<AddPaqueteDTO>> AddPaquete(AddPaqueteDTO paquete)
+        private readonly ApplicationDbContext _context;
+        public PaqueteService(IMapper mapper, ApplicationDbContext context)
         {
-            throw new System.NotImplementedException();
+            this._mapper = mapper;
+            this._context = context;
+        }
+        public async Task<ServiceResponse<GetPaqueteDTO>> AddPaquete(AddPaqueteDTO paqueteDto)
+        {
+            Paquete paquete = _mapper.Map<Paquete>(paqueteDto);
+            _context.Paquetes.Add(paquete);
+            await _context.SaveChangesAsync();
+            ServiceResponse<GetPaqueteDTO> serviceResponse = new ServiceResponse<GetPaqueteDTO>();
+            serviceResponse.Data = _mapper.Map<GetPaqueteDTO>(paquete);
+            serviceResponse.Message = "Paquete agregado correctamente";
+            return serviceResponse;
         }
 
-        public Task<ServiceResponse<GetPaqueteDTO>> GetPaqueteById(int id)
+        public async Task<ServiceResponse<GetPaqueteDTO>> GetPaqueteById(int id)
         {
-            throw new System.NotImplementedException();
+            Paquete paquete =  _context.Paquetes.FirstOrDefault(x => x.Id == id);
+            ServiceResponse<GetPaqueteDTO> serviceResponse = new ServiceResponse<GetPaqueteDTO>();
+            serviceResponse.Data = _mapper.Map<GetPaqueteDTO>(paquete);
+            return serviceResponse;
         }
     }
 }
