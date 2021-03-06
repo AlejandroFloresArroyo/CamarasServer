@@ -1,4 +1,5 @@
 ﻿using CamKyscn.Dtos;
+using CamKyscn.Entities;
 using CamKyscn.Services.BandaService;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,17 +23,24 @@ namespace CamKyscn.Controllers
 		[HttpGet()]
 		public async Task<IActionResult> Get()
 		{
-			return Ok(await _bandaService.GetBandaById(0));
+			return Ok(await _bandaService.GetAllBandas());
 		}
 
-		[HttpGet("{id}")]
-		public async Task<IActionResult> GetById(int id)
+		[HttpGet("{codigo}")]
+		public async Task<IActionResult> GetByCodigo(string codigo)
 		{
-			return Ok(await _bandaService.GetBandaById(id));
+			return Ok(await _bandaService.GetBandaByCodigo(codigo));
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> AddBanda(AddBandaDTO banda){
+			if (!ModelState.IsValid){
+				ServiceResponse<GetBandaDTO> serviceResponse = new ServiceResponse<GetBandaDTO>();
+				serviceResponse.Data = null;
+				serviceResponse.Success = false;
+				serviceResponse.Message = "El modelo banda no es valido";
+				return BadRequest(serviceResponse);
+			}
 			return Ok(await _bandaService.AddBanda(banda));
 		}
 	}

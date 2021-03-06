@@ -8,7 +8,7 @@ namespace CamKyscn.Services.BandaService
 	public interface IBandaService
 	{
 		Task<ServiceResponse<List<GetBandaDTO>>> GetAllBandas();
-		Task<ServiceResponse<GetBandaDTO>> GetBandaById(int id);
-		Task<ServiceResponse<AddBandaDTO>> AddBanda(AddBandaDTO banda);
+		Task<ServiceResponse<GetBandaDTO>> GetBandaByCodigo(string codigo);
+		Task<ServiceResponse<GetBandaDTO>> AddBanda(AddBandaDTO banda);
 	}
 }

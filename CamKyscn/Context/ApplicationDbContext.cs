@@ -22,3 +22,4 @@ namespace CamKyscn.Context
         public DbSet<Foto> Fotos { get; set; }
     }
 }
+ 

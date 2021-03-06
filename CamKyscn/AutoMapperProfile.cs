@@ -8,7 +8,10 @@ namespace CamKyscn
     {
         public AutoMapperProfile()
         {
+            CreateMap<GetBandaDTO, Banda>();
             CreateMap<Banda, GetBandaDTO>();
+            CreateMap<Banda, AddBandaDTO>();
+            CreateMap<AddBandaDTO, Banda>();
         }
         
     }

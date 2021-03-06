@@ -21,9 +21,9 @@ namespace CamKyscn.Migrations
 
             modelBuilder.Entity("CamKyscn.Entities.Banda", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Codigo")
@@ -41,10 +41,13 @@ namespace CamKyscn.Migrations
 
             modelBuilder.Entity("CamKyscn.Entities.Foto", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PaqueteId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Ruta")
                         .HasColumnType("nvarchar(max)");
@@ -52,12 +55,9 @@ namespace CamKyscn.Migrations
                     b.Property<string>("Ruta_Demo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("paqueteId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("paqueteId");
+                    b.HasIndex("PaqueteId");
 
                     b.ToTable("Fotos");
                 });
@@ -72,6 +72,9 @@ namespace CamKyscn.Migrations
                     b.Property<string>("Codigo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Comprado")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime2");
 
@@ -83,22 +86,24 @@ namespace CamKyscn.Migrations
             modelBuilder.Entity("CamKyscn.Entities.Banda", b =>
                 {
                     b.HasOne("CamKyscn.Entities.Paquete", null)
-                        .WithMany("bandas")
+                        .WithMany("Bandas")
                         .HasForeignKey("PaqueteId");
                 });
 
             modelBuilder.Entity("CamKyscn.Entities.Foto", b =>
                 {
-                    b.HasOne("CamKyscn.Entities.Paquete", "paquete")
-                        .WithMany()
-                        .HasForeignKey("paqueteId");
-
-                    b.Navigation("paquete");
+                    b.HasOne("CamKyscn.Entities.Paquete", null)
+                        .WithMany("Fotos")
+                        .HasForeignKey("PaqueteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CamKyscn.Entities.Paquete", b =>
                 {
-                    b.Navigation("bandas");
+                    b.Navigation("Bandas");
+
+                    b.Navigation("Fotos");
                 });
 #pragma warning restore 612, 618
         }
