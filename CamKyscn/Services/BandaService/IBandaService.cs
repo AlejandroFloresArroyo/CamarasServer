@@ -1,7 +1,7 @@
-﻿using CamKyscn.Dtos;
-using CamKyscn.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using CamKyscn.Dtos;
+using CamKyscn.Entities;
 
 namespace CamKyscn.Services.BandaService
 {

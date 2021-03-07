@@ -8,6 +8,6 @@ namespace CamKyscn.Dtos.Paquete
         public DateTime Fecha { get; set; }
         public bool Comprado { get; set; }
 
-        public Banda[] Bandas { get; set; }
+        public int[] Bandas { get; set; }
     }
 }

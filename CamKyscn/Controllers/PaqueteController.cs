@@ -17,11 +17,10 @@ namespace CamKyscn.Controllers
             this._paqueteService = paqueteService;
         }
 
-        //TODO: Generar GetAll
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok();
+            return Ok(await _paqueteService.GetAllPaquetes());
         }
         
         //TODO: Generar GetByID

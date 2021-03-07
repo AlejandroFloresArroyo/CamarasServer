@@ -7,13 +7,20 @@ namespace CamKyscn.Entities
 {
     public class Paquete
     {
+
+        public Paquete()
+        {
+            Bandas = new List<Banda>();
+            Fotos = new List<Foto>();
+        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public DateTime Fecha { get; set; }
         public bool Comprado { get; set; }
         public string Codigo { get; set; }
-        public List<Banda> Bandas {get;set;}
-        public List<Foto> Fotos {get;set;}
+        public ICollection<Banda> Bandas { get; set; }
+        public ICollection<Foto> Fotos { get; set; }
     }
 }

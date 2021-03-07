@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CamKyscn.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210306080942_AddRelations")]
-    partial class AddRelations
+    [Migration("20210307111649_AddBandasOTM2")]
+    partial class AddBandasOTM2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

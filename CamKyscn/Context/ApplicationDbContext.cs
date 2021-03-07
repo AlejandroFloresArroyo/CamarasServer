@@ -12,6 +12,15 @@ namespace CamKyscn.Context
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Paquete>()
+                .HasMany(b => b.Bandas)
+                .WithOne();
+            modelBuilder.Entity<Paquete>()
+                .HasMany(b => b.Fotos)
+                .WithOne();
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=localhost,1433;Database=Camaras;User Id=sa;Password=Gato1412;").EnableSensitiveDataLogging(true);
@@ -22,4 +31,3 @@ namespace CamKyscn.Context
         public DbSet<Foto> Fotos { get; set; }
     }
 }
- 

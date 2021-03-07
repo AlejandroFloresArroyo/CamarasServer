@@ -1,11 +1,10 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using CamKyscn.Context;
 using CamKyscn.Dtos;
 using CamKyscn.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CamKyscn.Services.BandaService
 {

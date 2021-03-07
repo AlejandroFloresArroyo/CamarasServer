@@ -14,6 +14,5 @@ namespace CamKyscn.Entities
         public int Id { get; set; }
         public string Codigo { get; set; }
         public int? PaqueteId { get; set; }
-
     }
 }

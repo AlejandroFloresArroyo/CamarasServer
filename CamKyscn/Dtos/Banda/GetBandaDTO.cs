@@ -4,5 +4,6 @@ namespace CamKyscn.Dtos
     {
         public long Id { get; set; }
 		public string Codigo { get; set; }
+        public int PaqueteId { get; set; }
     }
 }
