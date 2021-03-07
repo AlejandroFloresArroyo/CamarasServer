@@ -11,7 +11,7 @@ namespace CamKyscn.Entities
         public Paquete()
         {
             Bandas = new List<Banda>();
-            Fotos = new List<Foto>();
+            Fotos = new List<Fotos>();
         }
 
         [Key]
@@ -21,6 +21,6 @@ namespace CamKyscn.Entities
         public bool Comprado { get; set; }
         public string Codigo { get; set; }
         public ICollection<Banda> Bandas { get; set; }
-        public ICollection<Foto> Fotos { get; set; }
+        public ICollection<Fotos> Fotos { get; set; }
     }
 }

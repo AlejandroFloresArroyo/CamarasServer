@@ -11,5 +11,7 @@ namespace CamKyscn.Dtos.Paquete
 
         public Banda[] Bandas { get; set; }
 
+        public Fotos[] Fotos { get; set; }
+
     }
 }

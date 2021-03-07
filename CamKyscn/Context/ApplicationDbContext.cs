@@ -28,6 +28,6 @@ namespace CamKyscn.Context
 
         public DbSet<Banda> Bandas { get; set; }
         public DbSet<Paquete> Paquetes { get; set; }
-        public DbSet<Foto> Fotos { get; set; }
+        public DbSet<Fotos> Fotos { get; set; }
     }
 }
