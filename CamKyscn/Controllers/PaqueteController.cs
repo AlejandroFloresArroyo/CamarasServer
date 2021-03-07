@@ -23,20 +23,17 @@ namespace CamKyscn.Controllers
             return Ok(await _paqueteService.GetAllPaquetes());
         }
         
-        //TODO: Generar GetByID
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(await _paqueteService.GetPaqueteById(id));
         }
        
-        //TODO: Generar GetByIDWithFotos
         [HttpGet("fotos/{id}")]
         public async Task<IActionResult> GetByIdWithFotos(int id)
         {
-            return Ok();
+            return Ok(await _paqueteService.GetPaqueteByIdFotos(id));
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Add(AddPaqueteDTO paqueteDTO){

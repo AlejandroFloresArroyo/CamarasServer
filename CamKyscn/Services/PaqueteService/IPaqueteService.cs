@@ -9,6 +9,7 @@ namespace CamKyscn.Services.PaqueteService
     {
         Task<ServiceResponse<List<GetPaqueteDTO>>> GetAllPaquetes();
         Task<ServiceResponse<GetPaqueteDTO>> GetPaqueteById(int id);
+        Task<ServiceResponse<GetPaqueteDTO>> GetPaqueteByIdFotos(int id);
         Task<ServiceResponse<GetPaqueteDTO>> AddPaquete(AddPaqueteDTO paquete);
 
     }
