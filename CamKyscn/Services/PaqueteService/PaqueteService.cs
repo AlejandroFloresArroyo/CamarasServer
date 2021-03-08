@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace CamKyscn.Services.PaqueteService
             Paquete paquete = new Paquete{
                 Fecha = paqueteDto.Fecha,
                 Comprado = paqueteDto.Comprado,
-                Codigo = "123",
+                Codigo = this.GenerarRandom(),
             };
             foreach (int id in paqueteDto.Bandas)
             {
@@ -60,6 +61,12 @@ namespace CamKyscn.Services.PaqueteService
             ServiceResponse<GetPaqueteDTO> serviceResponse = new ServiceResponse<GetPaqueteDTO>();
             serviceResponse.Data = _mapper.Map<GetPaqueteDTO>(paquete);
             return serviceResponse;
+        }
+
+        private string GenerarRandom(){
+            Random random = new Random();
+            long numero= random.Next(99999, 999999);
+            return numero.ToString();
         }
     }
 }
