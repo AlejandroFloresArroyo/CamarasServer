@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using CamKyscn.Dtos.Foto;
+using CamKyscn.Entities;
 using CamKyscn.Services.FotoService;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,22 +13,32 @@ namespace CamKyscn.Controllers
         private readonly IFotoService _fotoService;
         public FotoController(IFotoService fotoService)
         {
-            this._fotoService =  fotoService;
+            this._fotoService = fotoService;
         }
 
         //TODO: Generar GetAll
         [HttpGet("{PaqueteID}")]
         public async Task<IActionResult> GetAllByPaquete(long PaqueteID)
         {
-            return Ok();
+            return Ok("Reached");
         }
 
-        //TODO: Generar GetAll
         [HttpPost]
-        public async Task<IActionResult> Add()
+        public async Task<IActionResult> Add([FromForm] AddFotoDTO fotoDTO)
         {
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                if (fotoDTO.Foto != null && fotoDTO.Logo != null)
+                {
+                    return Ok(await _fotoService.AddFoto(fotoDTO));
+                }
+            }
+            ServiceResponse<GetFotoDTO> serviceResponse = new ServiceResponse<GetFotoDTO>();
+            serviceResponse.Success = false;
+            serviceResponse.Data = null;
+            serviceResponse.Message = "Bad Request";
+            return BadRequest(serviceResponse);
         }
-        
+
     }
 }

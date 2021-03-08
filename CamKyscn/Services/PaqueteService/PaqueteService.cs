@@ -43,9 +43,7 @@ namespace CamKyscn.Services.PaqueteService
         public async Task<ServiceResponse<List<GetPaqueteDTO>>> GetAllPaquetes()
         {
             ServiceResponse<List<GetPaqueteDTO>> serviceResponse = new ServiceResponse<List<GetPaqueteDTO>>();
-            
 			serviceResponse.Data = _mapper.Map<List<GetPaqueteDTO>>(_context.Paquetes.Include(x => x.Bandas).ToList());
-			// serviceResponse.Data = (_context.Paquetes.Select(x => _mapper.Map<Paquete>(x))).ToList();
 			return serviceResponse;
         }
 
@@ -58,7 +56,7 @@ namespace CamKyscn.Services.PaqueteService
         }
         public async Task<ServiceResponse<GetPaqueteDTO>> GetPaqueteByIdFotos(int id)
         {
-            Paquete paquete =  await _context.Paquetes.Include(x => x.Bandas).SingleAsync(a => a.Id == id);
+            Paquete paquete =  await _context.Paquetes.Include(x => x.Fotos).SingleAsync(a => a.Id == id);
             ServiceResponse<GetPaqueteDTO> serviceResponse = new ServiceResponse<GetPaqueteDTO>();
             serviceResponse.Data = _mapper.Map<GetPaqueteDTO>(paquete);
             return serviceResponse;
