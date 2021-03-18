@@ -22,14 +22,17 @@ namespace CamKyscn.Services.FotoService
         public async Task<ServiceResponse<GetFotoDTO>> AddFoto(AddFotoDTO foto)
         {
             // Genera el dia para la carpeta
-            DateTime thisDay = DateTime.Today;
-            String dateName = this.RemoveWhiteSpaces(thisDay.ToString("D"));
+            DateTime thisDay = DateTime.Now;
+            DateTime today = DateTime.Today;
+            String dateName = thisDay.ToString("yyyy-MM-dd");
 
             // Crea las rutas
+            // string path = Path.Combine("http://localhost:5000/", "images/" + dateName).ToLower();
             string path = Path.Combine(_env.WebRootPath, "images/" + dateName).ToLower();
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             string pathFile = Path.Combine(path, foto.Foto.FileName);
             string pathFileLogo = Path.Combine(path, foto.Logo.FileName);
+
             
 
             // Guarda las imagenes en el directorio
@@ -45,12 +48,15 @@ namespace CamKyscn.Services.FotoService
             // Guardar las fotos en la db
             Banda banda = _context.Bandas.FirstOrDefault(x => x.Codigo == foto.CodigoBanda);
             Paquete paquete = _context.Paquetes.FirstOrDefault(x => x.Id == banda.PaqueteId);
+            
+            string pathToFile = Path.Combine("http://localhost:5000/", "images/" + dateName, foto.Foto.FileName);
+            string pathToFileLogo = Path.Combine("http://localhost:5000/", "images/" +dateName  , foto.Logo.FileName);
 
-            if (thisDay == paquete.Fecha)
+            if (today == paquete.Fecha)
             {
                 paquete.Fotos.Add(new Fotos {
-                    Ruta = pathFile,
-                    Ruta_Demo = pathFileLogo,
+                    Ruta = pathToFile,
+                    Ruta_Demo = pathToFileLogo,
                     PaqueteId = paquete.Id
                 });
                 _context.Update(paquete);
@@ -60,13 +66,13 @@ namespace CamKyscn.Services.FotoService
             GetFotoDTO getFotoDto = new GetFotoDTO
             {
                 CodigoBanda = foto.CodigoBanda,
-                Foto = pathFile,
-                Logo = pathFileLogo
+                Foto = pathToFile,
+                Logo = pathToFileLogo
             };
 
             ServiceResponse<GetFotoDTO> serviceResponse = new ServiceResponse<GetFotoDTO>();
             serviceResponse.Data = getFotoDto;
-            serviceResponse.Message = "Foto agregada correctamente";
+            serviceResponse.Message = "Foto agregada correctamente, paquete: " + paquete.Id;
             return serviceResponse;
         }
 
