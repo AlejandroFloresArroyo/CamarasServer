@@ -1,7 +1,9 @@
+using System;
 using System.Threading.Tasks;
 using CamKyscn.Dtos.Foto;
 using CamKyscn.Entities;
 using CamKyscn.Services.FotoService;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CamKyscn.Controllers
@@ -24,15 +26,18 @@ namespace CamKyscn.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromForm] AddFotoDTO fotoDTO)
+        public async Task<IActionResult> Add([FromForm]AddFotoDTO fotoDTO)
         {
             if (ModelState.IsValid)
             {
-                if (fotoDTO.Foto != null && fotoDTO.Logo != null)
+                //if (fotoDTO.Foto != null && fotoDTO.Logo != null)
+
+                if (fotoDTO.Foto != null)
                 {
                     return Ok(await _fotoService.AddFoto(fotoDTO));
                 }
             }
+
             ServiceResponse<GetFotoDTO> serviceResponse = new ServiceResponse<GetFotoDTO>();
             serviceResponse.Success = false;
             serviceResponse.Data = null;

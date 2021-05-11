@@ -20,17 +20,20 @@ namespace CamKyscn.Controllers
 			_bandaService = bandaService;
 		}
 
+
 		[HttpGet()]
 		public async Task<IActionResult> Get()
 		{
 			return Ok(await _bandaService.GetAllBandas());
 		}
 
+
 		[HttpGet("{codigo}")]
 		public async Task<IActionResult> GetByCodigo(string codigo)
 		{
 			return Ok(await _bandaService.GetBandaByCodigo(codigo));
 		}
+
 
 		[HttpPost]
 		public async Task<IActionResult> AddBanda(AddBandaDTO banda){

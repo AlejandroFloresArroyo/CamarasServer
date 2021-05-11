@@ -28,13 +28,12 @@ namespace CamKyscn.Services.FotoService
 
             // Crea las rutas
             // string path = Path.Combine("http://localhost:5000/", "images/" + dateName).ToLower();
-            string path = Path.Combine(_env.WebRootPath, "images/" + dateName).ToLower();
+            string path = Path.Combine(_env.WebRootPath, "images/" + dateName + "/" + foto.Locacion).ToLower();
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             string pathFile = Path.Combine(path, foto.Foto.FileName);
             string pathFileLogo = Path.Combine(path, foto.Logo.FileName);
 
             
-
             // Guarda las imagenes en el directorio
             if (foto.Foto.Length > 0 && foto.Logo.Length > 0){
                 using (Stream fileStream =  new FileStream(pathFile, FileMode.Create)){
@@ -49,8 +48,8 @@ namespace CamKyscn.Services.FotoService
             Banda banda = _context.Bandas.FirstOrDefault(x => x.Codigo == foto.CodigoBanda);
             Paquete paquete = _context.Paquetes.FirstOrDefault(x => x.Id == banda.PaqueteId);
             
-            string pathToFile = Path.Combine("http://localhost:5000/", "images/" + dateName, foto.Foto.FileName);
-            string pathToFileLogo = Path.Combine("http://localhost:5000/", "images/" +dateName  , foto.Logo.FileName);
+            string pathToFile = Path.Combine("http://localhost:5000/", "images/" + dateName + "/" + foto.Locacion, foto.Foto.FileName);
+            string pathToFileLogo = Path.Combine("http://localhost:5000/", "images/" +dateName + "/" + foto.Locacion, foto.Logo.FileName);
 
             if (today == paquete.Fecha)
             {
@@ -76,11 +75,6 @@ namespace CamKyscn.Services.FotoService
             return serviceResponse;
         }
 
-        private string RemoveWhiteSpaces(string input)
-        {
-            return new string(input.ToCharArray()
-                .Where(c => !Char.IsWhiteSpace(c))
-                .ToArray());
-        }
+        
     }
 }
